@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-print("--- ANÁLISE FORMULAÇÕES IMPLÍCITAS ---")
 h = 0.05
 dx = dy = h
 passos_tempo = [100.0, 50.0, 25.0, 12.5]
@@ -22,7 +21,6 @@ for beta in betas:
         T_ana = solucao_analitica(X, Y, T_FINAL)
         erro_rms = calcular_rms(T_num, T_ana)
         
-        # Formatação com vírgula para os decimais
         dt_str = str(dt).replace('.', ',')
         rms_str = f"{erro_rms:.5f}".replace('.', ',')
         
@@ -33,14 +31,10 @@ for beta in betas:
             "Erro RMS [K]": rms_str
         })
 
-# 1. Cria o DataFrame com os dados já formatados com vírgula
 df = pd.DataFrame(dados_tabela)
 
-# 2. Imprime no terminal para referência
-print("\n--- Tabela Gerada ---")
 print(df.to_string(index=False))
 
-# 3. Cria a janela gráfica para exibir a tabela
 fig, ax = plt.subplots(figsize=(10, 4))
 ax.axis('off')
 ax.axis('tight')
@@ -51,7 +45,6 @@ tabela.auto_set_font_size(False)
 tabela.set_fontsize(11)
 tabela.scale(1.2, 1.5)
 
-# Pinta os cabeçalhos para melhor visualização
 for (row, col), cell in tabela.get_celld().items():
     if row == 0:
         cell.set_text_props(weight='bold', color='white')
@@ -60,5 +53,4 @@ for (row, col), cell in tabela.get_celld().items():
 plt.title("Influência do Passo de Tempo nas Formulações Implícitas", pad=20)
 plt.tight_layout()
 
-# Abre a janela gráfica
 plt.show()
